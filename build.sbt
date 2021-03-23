@@ -65,9 +65,7 @@ lazy val mimaSettings = Seq(
 
 lazy val protobufSettings = Seq(
   sourceDirectory in ProtobufConfig := baseDirectory.value / "src" / "main" / "proto",
-  protobufRunProtoc in ProtobufConfig := (args =>
-    com.github.os72.protocjar.Protoc.runProtoc("-v351" +: args.toArray)
-  )
+  protobufRunProtoc in ProtobufConfig := (args => scala.sys.process.Process("protoc", args).!)
 )
 
 lazy val assemblySettings = Seq(
